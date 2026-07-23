@@ -1,0 +1,25 @@
+[
+  {
+    "name": "owner panel opens from the main menu",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "owner:panel" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "🛠 Owner panel — manage arrangement requests." }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "owner views the configured question set and restores defaults",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "owner:panel" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "🛠 Owner panel — manage arrangement requests." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "owner:config_questions" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "❓ Question set\n\n1. What is the arrangement for?\n2. Add any details."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "owner:restore_questions" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "✅ Questions restored to default." }
+          }
+        ]
+      }
+    ]
+  }
+]

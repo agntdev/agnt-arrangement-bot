@@ -1,19 +1,33 @@
 [
   {
-    "name": "/arrange",
+    "name": "/arrange invites the user to a private chat",
     "steps": [
       {
+        "send": { "text": "/arrange" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Trigger arrangement flow in group chat"
+              "text": "Let's take this to a private chat to keep your details private. Tap below to continue."
             }
           }
-        ],
-        "send": {
-          "text": "/arrange"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "a message containing 'arrangement' triggers the same invitation",
+    "steps": [
+      {
+        "send": { "text": "I need an arrangement please" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Let's take this to a private chat to keep your details private. Tap below to continue."
+            }
+          }
+        ]
       }
     ]
   }
