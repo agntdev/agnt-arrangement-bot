@@ -1,0 +1,38 @@
+[
+  {
+    "name": "a second trigger while a flow is in progress is blocked",
+    "steps": [
+      {
+        "send": { "callback": "private:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Got it, Test. Let's set up your request.\n\n1. What is the arrangement for?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "private:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "You already have a request in progress. Tap ✖️ Cancel on the last question to start over."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "flow:cancel" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "❌ Cancelled. Your request was not submitted." }
+          }
+        ]
+      }
+    ]
+  }
+]

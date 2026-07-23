@@ -1,0 +1,38 @@
+[
+  {
+    "name": "an invalid (empty) response re-asks the current question",
+    "steps": [
+      {
+        "send": { "callback": "private:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Got it, Test. Let's set up your request.\n\n1. What is the arrangement for?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "   " },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "⚠️ Please enter a response.\n\n1. What is the arrangement for?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "flow:cancel" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "❌ Cancelled. Your request was not submitted." }
+          }
+        ]
+      }
+    ]
+  }
+]

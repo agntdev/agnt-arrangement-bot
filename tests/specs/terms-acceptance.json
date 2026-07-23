@@ -1,0 +1,72 @@
+[
+  {
+    "name": "terms acceptance requires the exact 'I accept' text",
+    "steps": [
+      {
+        "send": { "callback": "private:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Got it, Test. Let's set up your request.\n\n1. What is the arrangement for?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "A party" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "2. Add any details." } }
+        ]
+      },
+      {
+        "send": { "text": "Bring cake" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "📋 Please review the terms:\n\nBy submitting, you confirm the details you provided are accurate. Your request is shared only with the owner, who will review and act on it.\n\nType 'I accept' to confirm and submit your request."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "yes" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Please type exactly 'I accept' to confirm and submit."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "I accept" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "📋 New arrangement request\n\nFrom: Test\n\n1. What is the arrangement for?\n   A party\n2. Add any details.\n   Bring cake\n\n📎 Attachments: 0\n✅ Terms accepted"
+            }
+          },
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Your request was submitted. The owner will review it."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "owner:mark_processed" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "✅ Marked as processed." }
+          }
+        ]
+      }
+    ]
+  }
+]

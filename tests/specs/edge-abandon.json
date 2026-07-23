@@ -1,6 +1,6 @@
 [
   {
-    "name": "Continue in private starts the question flow",
+    "name": "sending /start mid-flow abandons it and re-shows the menu",
     "steps": [
       {
         "send": { "callback": "private:start" },
@@ -10,6 +10,15 @@
             "payload": {
               "text": "Got it, Test. Let's set up your request.\n\n1. What is the arrangement for?"
             }
+          }
+        ]
+      },
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
           }
         ]
       }

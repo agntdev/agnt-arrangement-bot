@@ -1,0 +1,52 @@
+[
+  {
+    "name": "attachments are captured in the private flow",
+    "steps": [
+      {
+        "send": { "callback": "private:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Got it, Test. Let's set up your request.\n\n1. What is the arrangement for?"
+            }
+          }
+        ]
+      },
+      {
+        "send": {
+          "update": {
+            "update_id": 50,
+            "message": {
+              "message_id": 501,
+              "date": 0,
+              "chat": { "id": 1, "type": "private", "first_name": "Test" },
+              "from": { "id": 1, "is_bot": false, "first_name": "Test" },
+              "photo": [
+                { "file_id": "photo0", "width": 1, "height": 1 },
+                { "file_id": "photo1", "width": 2, "height": 2 }
+              ]
+            }
+          }
+        },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "📎 Attachment saved (1 so far).\n\n1. What is the arrangement for?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "flow:cancel" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "❌ Cancelled. Your request was not submitted." }
+          }
+        ]
+      }
+    ]
+  }
+]
